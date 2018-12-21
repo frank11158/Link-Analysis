@@ -36,7 +36,7 @@ def HITS(graph):
             diff += abs(authority[item] - authority_pre[item])
             if hubness_pre != None:
                 diff += abs(hubness[item] - hubness_pre[item])
-        if diff < 0.03:
+        if diff < 0.001:
             break
         else:
             print(diff)
@@ -73,28 +73,3 @@ def normalize(obj):
     for item in obj:
         obj[item] = float(obj[item])/maxVal
     return obj
-
-def readGraph():
-    graph = {}
-    f = open("../hw3dataset/graph_4.txt", "r")
-    loadData = f.read().splitlines()
-    for line in loadData:
-        a = line.split(",")
-        if a[0] in graph.keys(): 
-            graph[a[0]].append(a[1])
-        else:
-            graph[a[0]] = [a[1]]
-    return graph
-
-def main():
-    graph = readGraph()
-    print(graph)
-    (authority, hubness) = HITS(graph)
-    print("Authority: " + str(authority))
-    print("Hubness: " + str(hubness))
-    print("   authority, hubness")
-    for key in graph:
-        print("%s: %f, %f" % (key, authority[key], hubness[key]))
-
-if __name__ == "__main__":
-    main()
