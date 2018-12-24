@@ -11,7 +11,6 @@ def PageRank(graph, damp):
                 if key in graph[vertex]:
                     result[key] += pageRank[vertex]/links
             result[key] = (1-damp)*result[key] + damp*pageRank[key]
-            # print(result)
             diff += abs(pageRank[key] - result[key])
         if diff > 0.001:
             pageRank = result.copy()

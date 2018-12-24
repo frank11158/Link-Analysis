@@ -5,7 +5,7 @@ def HITS(graph):
     graph = removeOutLinks(graph)
     authority = initializeAuthority(graph)
     hubness = None
-    palink = gatParentLink(graph)
+    palink = getParentLink(graph)
     authority_pre = None
     hubness_pre = None
     
@@ -38,8 +38,8 @@ def HITS(graph):
                 diff += abs(hubness[item] - hubness_pre[item])
         if diff < 0.001:
             break
-        else:
-            print(diff)
+        # else:
+        #     print(diff)
     return authority, hubness
 
 def removeOutLinks(graph):
@@ -55,7 +55,7 @@ def removeOutLinks(graph):
 def initializeAuthority(graph):
     return dict(zip(graph.keys(), [1]*len(graph)))
 
-def gatParentLink(graph):
+def getParentLink(graph):
     parents = {}
     for node in graph:
         parents[node] = []
@@ -65,7 +65,7 @@ def gatParentLink(graph):
                 parents[link].append(node)
             else:
                 parents[link] = [node]
-    print(parents)
+    # print(parents)
     return parents
 
 def normalize(obj):
